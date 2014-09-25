@@ -23,18 +23,18 @@ public class GameScreen implements Screen {
 	final int IMG_WIDTH = 64;
 	final int IMG_HEIGHT = 64;
 
-	Texture dropImage;
-	Texture redDropImage;
-	Texture bucketImage;
-	Sound dropSound;
-	Music rainMusic;
-	OrthographicCamera camera;
-	Rectangle bucket;
-	Array<Rectangle> raindrops;
-	Array<Rectangle> reddrops;
-	long lastDropTime;
-	long lastRedDropTime;
-	int dropsGathered;
+	private Texture dropImage;
+	private Texture redDropImage;
+	private Texture bucketImage;
+	private Sound dropSound;
+	private Music rainMusic;
+	private OrthographicCamera camera;
+	private Rectangle bucket;
+	private Array<Rectangle> raindrops;
+	private Array<Rectangle> reddrops;
+	private long lastDropTime;
+	private long lastRedDropTime;
+	private int dropsGathered;
 
 	public GameScreen(final Drop game) {
 		this.game = game;
@@ -65,6 +65,7 @@ public class GameScreen implements Screen {
 		raindrops = new Array<Rectangle>();
 		spawnRaindrop();
 		
+		// create the red drops array then spawn the first red drop
 		reddrops = new Array<Rectangle>();
 		spawnReddrop();
 	}
@@ -84,7 +85,7 @@ public class GameScreen implements Screen {
         // specified by the camera
         game.batch.setProjectionMatrix(camera.combined);
 
-        // draw the bucket and all the drop
+        // draw the bucket and all the drops
         game.batch.begin();
         game.font.draw(game.batch, "Score: " + dropsGathered, 0, SCREEN_HEIGHT);
         game.batch.draw(bucketImage, bucket.x, bucket.y);
@@ -140,7 +141,7 @@ public class GameScreen implements Screen {
         	}
         }
         
-     // Iterate through the list of raindrops
+        // Iterate through the list of raindrops
         Iterator<Rectangle> iter2 = reddrops.iterator();
         while (iter2.hasNext()) {
         	Rectangle reddrop = iter2.next();
