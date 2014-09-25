@@ -1,6 +1,5 @@
 package me.anhvannguyen.drop;
 
-import sun.security.krb5.internal.PAData;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.TimeUtils;
 
 public class GameOverScreen implements Screen {
 	final Drop game;
@@ -29,7 +27,8 @@ public class GameOverScreen implements Screen {
 	private Skin skin;
 	private TextButton replayButton;
 	private TextButton exitButton;
-	private Label title;
+	private Label titleLabel;
+	private Label scoreLabel;
 	
 	
 	OrthographicCamera camera;
@@ -47,7 +46,8 @@ public class GameOverScreen implements Screen {
 		skin = new Skin(Gdx.files.internal("skins/menuSkin.json"), new TextureAtlas("skins/menuSkin.pack"));
 		replayButton = new TextButton("Replay", skin);
 		exitButton = new TextButton("Exit", skin);
-		title = new Label("Score: " + score, skin);
+		titleLabel = new Label("Game Over", skin);
+		scoreLabel = new Label("Score: " + score, skin);
 	}
 
 	@Override
@@ -88,7 +88,8 @@ public class GameOverScreen implements Screen {
 		
 		//The elements are displayed in the order you add them.
         //The first appear on top, the last at the bottom.
-		table.add(title).padBottom(40).row();
+		table.add(titleLabel).padBottom(10).row();
+		table.add(scoreLabel).padBottom(20).row();
         table.add(replayButton).size(250, 60).padBottom(20).row();
         table.add(exitButton).size(250, 60).padBottom(20).row();
         
@@ -119,7 +120,8 @@ public class GameOverScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+		skin.dispose();
+		stage.dispose();
 	}
 
 }
