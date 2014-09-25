@@ -31,7 +31,7 @@ public class GameOverScreen implements Screen {
 	private Label scoreLabel;
 	
 	
-	OrthographicCamera camera;
+	private OrthographicCamera camera;
 	
 	public GameOverScreen(final Drop game, int score) {
 		this.game = game;
